@@ -6,7 +6,29 @@
             this is where the form goes
         </div>
         <div class="col-md-8">
-            this is where the table goes
+            <table  class='table'>
+                <thead>
+                <th scope="col">ID</th>
+                <th scope="col">Status</th>
+                <th scope="col">Message</th>
+                <th scope="col">Send On</th>
+                <th scope="col">Sent on</th>
+                <th scope="col">Delete</th>
+                </thead>
+        <tbody>
+                {%  if reminders %}
+                    {%  for reminder in reminders %}
+                    <tr>
+                    <td>{{ reminder.id }}</td>
+                    <td>{{ reminder.status }}</td>
+                    <td>{{ reminder.message }}</td>
+                    <td>{{ reminder.send_on }}</td>
+                    <td>{% if reminder.sent_on %} }{{ reminder.sent_on }}{% else %}N/A{%  endif %}</td>
+                    <td><a href="#">delete</a></td>
+                    {% endfor %}
+                    {%  else %}
+                    <tr><td class="text-center" colspan="6">No reminders added</td></tr>
+                {%  endif %}
         </div>
     </div>
 </div>

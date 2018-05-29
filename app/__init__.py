@@ -4,6 +4,7 @@ from .extensions import db
 from .models import Reminder
 
 
+
 def create_app(config):
     app = Flask(__name__)
     app.config.from_object(config)
