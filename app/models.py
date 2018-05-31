@@ -1,4 +1,5 @@
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 from .extensions import db
 
 
@@ -12,10 +13,11 @@ class Reminder(db.Model):
     def status(self):
         return 'delivered' if self.sent_on else 'pending'
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(75), unique=True)
     password = db.Column(db.String(150))
+
 
 
 

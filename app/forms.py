@@ -1,4 +1,4 @@
-from wtforms import (Form, StringField, DateTimeField, SubmitField,
+from wtforms import (Form, StringField, DateTimeField, SubmitField, PasswordField,
                      validators as v)
 from wtforms.widgets import TextArea
 
@@ -11,3 +11,9 @@ class ReminderForm(Form):
     submit = SubmitField('Create')
 
 
+class LoginForm(Form):
+    email = StringField('Email', validators=[v.InputRequired(), v.Email()])
+    password = PasswordField('Password', validators=[v.InputRequired()])
+    #password2 = PasswordField('Repeat password', validators=[v.InputRequired(),
+    #thi is for registration               v.EqualTo('password')])
+    submit = SubmitField('Login')
