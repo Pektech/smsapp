@@ -1,7 +1,9 @@
 from flask import Flask
 from .views import reminders
-from .extensions import db, login_manager
+from .extensions import db, login_manager, celery
 from .models import Reminder, User
+from .tasks import send_reminders
+
 
 
 
@@ -26,6 +28,7 @@ def register_blueprints(app):
 def register_extensions(app):
     db.init_app(app)
     login_manager.init_app(app)
+    celery.init_app(app)
 
     login_manager.login_view = 'reminders.login'
 
@@ -40,7 +43,8 @@ def register_shell(app):
         return{
             'db': db,
             'Reminder': Reminder,
-            'User': User
+            'User': User,
+            'send_reminders': send_reminders
         }
 
     app.shell_context_processor(shell_context)
