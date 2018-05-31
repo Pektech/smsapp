@@ -3,6 +3,7 @@ from .views import reminders
 from .extensions import db, login_manager, celery
 from .models import Reminder, User
 from .tasks import send_reminders
+from . import celery_config
 
 
 
@@ -30,6 +31,7 @@ def register_extensions(app):
     login_manager.init_app(app)
     celery.init_app(app)
 
+    celery.config_from_object(celery_config)
     login_manager.login_view = 'reminders.login'
 
     @login_manager.user_loader
